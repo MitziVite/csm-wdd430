@@ -1,0 +1,23 @@
+
+<div class="panel panel-default">
+    <div class="panel-heading clearfix">
+        <h3 class="panel-title pull-left">{{ contact.name }}</h3>
+        <span class="pull-right">
+          <img 
+            [src]="contact.imagePath" 
+            alt="{{ contact.name }}" 
+            class="img-responsive" 
+            style="max-height: 50px;">
+        </span>
+        <a href="#" class="btn btn-danger btn-sm pull-right">Delete</a>
+        <a href="#" class="btn btn-primary btn-sm pull-right">Edit</a>
+    </div>
+    <div class="panel-body">
+      <div class="col-xs-12">
+        <!-- <p><strong>Email:</strong> {{ contact.email }}</p> -->
+      <!-- <p><strong>Phone:</strong> {{ contact.phone }}</p> -->
+      <p>Email:</p>
+      <p>Phone</p>
+      </div>
+    </div>
+  </div>
