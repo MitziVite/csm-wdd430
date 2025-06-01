@@ -10,11 +10,11 @@ import { Contact } from '../../contacts/contact-model';
   styleUrl: './message-item.component.css'
 })
 export class MessageItemComponent {
-  @Input() message: Message;
+  @Input() message?: Message;
   messageSender: string;
   constructor(private contactService: ContactService) {} 
   ngOnInit() {
       const contact: Contact = this.contactService.getContact(this.message.sender);
-      this.messageSender = contact.name;
+      this.messageSender = contact ? contact.name : '';
    }
 }
