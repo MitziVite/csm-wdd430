@@ -4,9 +4,8 @@
     </div>
   
   <div class="col-md-4">
-  <app-document-detail
-    *ngIf="selectedDocument" 
-    [document]="selectedDocument">
-  </app-document-detail>
+  <!-- <app-document-detail></app-document-detail> -->
+  <router-outlet></router-outlet>
+  <!-- </app-document-detail> -->
   </div>
 </div>
