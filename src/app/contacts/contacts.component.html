@@ -3,8 +3,9 @@
         <app-contact-list></app-contact-list>
     </div>
     <div class="col-md-5">
-        <p><app-contact-detail 
+        <!-- <p><app-contact-detail 
             *ngIf="selectedContact" 
-            [contact]="selectedContact"></app-contact-detail></p>
-    </div>
+            [contact]="selectedContact"></app-contact-detail></p> -->
+            <router-outlet></router-outlet>
+        </div>
 </div>
