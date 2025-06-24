@@ -21,5 +21,15 @@
       <p>Email: {{ contact.email }}</p>
       <p>Phone: {{ contact.phone }}</p>
     </div>
+    <div *ngIf="contact.group && contact.group.length > 0">
+  <h4>Group Contacts:</h4>
+
+    <div *ngFor="let contact of contact.group; let i = index">
+      <!-- {{ contact.name }} ({{ contact.email }}) -->
+         <div>
+          <app-contact-item class="col-sm-11" [contact]="contact"></app-contact-item>
+    </div>
+
+</div>
   </div>
 </div>

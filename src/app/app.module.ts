@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ContactsComponent } from './contacts/contacts.component';
@@ -17,7 +16,13 @@ import { MessageEditComponent } from './messages/message-edit/message-edit.compo
 import { MessageListComponent } from './messages/message-list/message-list.component';
 import { DropdownDirective } from './shared/dropdown.directive';
 import { DocumentEditComponent } from './documents/document-edit/document-edit.component';
-// import { ContactEditComponent } from './contacts/contact-edit.component';
+import { FormsModule } from '@angular/forms';
+import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component';
+// import { DragDropModule } from '@angular/cdk/drag-drop';
+// import { DndModule }from 'ng2-dnd';
+// import { RouterModule } from '@angular/router';
+import {CdkDragDrop, moveItemInArray, transferArrayItem, CdkDrag, CdkDropList, DragDropModule,} from '@angular/cdk/drag-drop';
+
 
 @NgModule({
   declarations: [
@@ -35,12 +40,18 @@ import { DocumentEditComponent } from './documents/document-edit/document-edit.c
     MessageEditComponent,
     MessageListComponent,
     DocumentEditComponent,
-    // ContactEditComponent
+    ContactEditComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    DropdownDirective
+    FormsModule,
+    DropdownDirective,
+    CdkDrag,
+    CdkDropList, 
+    DragDropModule
+    // RouterModule
+    // DragDropModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

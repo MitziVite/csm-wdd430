@@ -4,12 +4,18 @@
       <a [routerLink]="['new']" class="btn btn-success btn-sm pull-right">New Contact</a>
     </div>
     <div class="panel-body">
-      <div class="col-xs-12">
-        <app-contact-item
+      <div class="col-xs-12"
+       cdkDropList 
+                class="col-xs-12" 
+                id="contactList"
+                [cdkDropListData]="contacts"
+                [cdkDropListConnectedTo]="['groupList']">
+        <!-- <app-contact-item
         *ngFor=" let contact of contacts"
         [contact]="contact"
-        
-        ></app-contact-item>
+        dnd-draggable [dragEnabled]="true" [dragData]="contact" [dropZones]="['contactGroup']"
+        ></app-contact-item> -->
+        <app-contact-item cdkDrag *ngFor="let contact of contacts" [cdkDragData]="contact" [contact]="contact"></app-contact-item>
       </div>
     </div>
   </div>
