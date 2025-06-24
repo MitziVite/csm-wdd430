@@ -2,7 +2,7 @@
   import {Contact} from './contact-model';
   import {MOCKCONTACTS} from './MOCKCONTACTS';
   import { Subject } from 'rxjs';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
   @Injectable({
     providedIn: 'root'
 })
@@ -13,7 +13,7 @@
     maxContactId: number = 0;
     contacts: Contact [] =[];
 
-    constructor() {
+    constructor(private http: HttpClient) {
       this.contacts = MOCKCONTACTS;
       this.maxContactId = this.getMaxId();
     }
@@ -49,8 +49,10 @@
         this.maxContactId++;
         newContact.id = this.maxContactId.toString();
         this.contacts.push(newContact);
-        const contactsListClone = this.contacts.slice();
-        this.documentListChangedEvent.next(contactsListClone);
+        this.saveContactsToServer();
+        // this.contacts.push(newContact);
+        // const contactsListClone = this.contacts.slice();
+        // this.documentListChangedEvent.next(contactsListClone);
       }
     }
 
@@ -64,8 +66,9 @@
       }
       newContact.id = originalContact.id;
       this.contacts[pos] = newContact;
-      const contactsListClone = this.contacts.slice();
-      this.documentListChangedEvent.next(contactsListClone);
+      // const contactsListClone = this.contacts.slice();
+      // this.documentListChangedEvent.next(contactsListClone);
+      this.saveContactsToServer();
     }
     
     deleteContact(contact: Contact) {
@@ -77,7 +80,41 @@
       return;
     }
       this.contacts.splice(pos, 1);
-      let contactsListClone = this.contacts.slice();
-      this.documentListChangedEvent.next(contactsListClone);
+      // let contactsListClone = this.contacts.slice();
+      // this.documentListChangedEvent.next(contactsListClone);
+      this.saveContactsToServer();
     }
+    getContactsFromServer() {
+      this.http.get<Contact[]>('https://csmproject-b3996-default-rtdb.firebaseio.com/documents.json')
+        .subscribe(
+          (contacts: Contact[]) => {
+            this.contacts = contacts ?? [];
+            this.maxContactId = this.getMaxId();
+            this.contacts.sort((a, b) => {
+              if (a.name < b.name) return -1;
+              if (a.name > b.name) return 1;
+              return 0;
+            });
+            this.contactChangedEvent.next(this.contacts.slice());
+          },
+          (error: any) => {
+            console.error(error);
+          }
+
+          );
+    }
+
+  saveContactsToServer() {
+    const contactsString = JSON.stringify(this.contacts);
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    this.http.put('https://csmproject-b3996-default-rtdb.firebaseio.com/contacts.json', contactsString, { headers })
+      .subscribe(
+        () => {
+          this.contactChangedEvent.next(this.contacts.slice());
+        },
+        (error: any) => {
+          console.error(error);
+        }
+      );
+  }
   }

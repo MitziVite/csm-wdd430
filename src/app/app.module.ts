@@ -18,10 +18,14 @@ import { DropdownDirective } from './shared/dropdown.directive';
 import { DocumentEditComponent } from './documents/document-edit/document-edit.component';
 import { FormsModule } from '@angular/forms';
 import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component';
+
 // import { DragDropModule } from '@angular/cdk/drag-drop';
 // import { DndModule }from 'ng2-dnd';
 // import { RouterModule } from '@angular/router';
 import {CdkDragDrop, moveItemInArray, transferArrayItem, CdkDrag, CdkDropList, DragDropModule,} from '@angular/cdk/drag-drop';
+import { ContactsFilterPipe } from './contacts/contacts-filter.pipe';
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 @NgModule({
@@ -41,6 +45,7 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem, CdkDrag, CdkDropList, D
     MessageListComponent,
     DocumentEditComponent,
     ContactEditComponent,
+    ContactsFilterPipe,
   ],
   imports: [
     BrowserModule,
@@ -49,9 +54,8 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem, CdkDrag, CdkDropList, D
     DropdownDirective,
     CdkDrag,
     CdkDropList, 
-    DragDropModule
-    // RouterModule
-    // DragDropModule,
+    DragDropModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
